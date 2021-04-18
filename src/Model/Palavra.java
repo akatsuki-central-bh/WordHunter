@@ -5,22 +5,22 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author leanddro
  */
 public class Palavra{
   private String palavra;
-  private int[] position;
+  private int[][] position;
   private Orientacao orientacao;
-  private int[] coord;
   private boolean descoberta = false;
 
-  public Palavra(String palavra, int[] position, Orientacao orientacao, int[] coord) {
+  public Palavra(String palavra, int[][] position, Orientacao orientacao) {
     this.palavra = palavra;
     this.position = position;
     this.orientacao = orientacao;
-    this.coord = coord;
   }
 
   public String getPalavra() {
@@ -31,11 +31,11 @@ public class Palavra{
     this.palavra = palavra;
   }
 
-  public int[] getPosition() {
+  public int[][] getPosition() {
     return position;
   }
 
-  public void setPosition(int[] position) {
+  public void setPosition(int[][] position) {
     this.position = position;
   }
 
@@ -47,20 +47,31 @@ public class Palavra{
     this.orientacao = orientacao;
   }
 
-  public int[] getCoord() {
-    return coord;
-  }
-
-  public void setCoord(int[] coord) {
-    this.coord = coord;
-  }
-
   public boolean isDescoberta() {
     return descoberta;
   }
 
   public void setDescoberta(boolean descoberta) {
     this.descoberta = descoberta;
+  }
+  
+  public String toString(){
+    return palavra;
+  }
+  
+  public static void main(String[] args) {
+    int[][] posicao = {{0}, {0}};
+    Palavra p = new Palavra("BUG", posicao, Orientacao.HORIZONTAL);
+    ArrayList<Palavra> palavras = new ArrayList<>();
+    palavras.add(p);
+    Mapa mapa = new Mapa(3, 3, palavras);
+    mapa.alocarPalavras();
+//    String[][] mapa = 
+//      {{"A","B","C"},{"D","E","F"},{"G","H","I"}};
+    
+    
+    
+    System.out.println(mapa);
   }
   
 }
