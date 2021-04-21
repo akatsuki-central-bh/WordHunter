@@ -63,6 +63,8 @@ public class Mapa {
       if(palavra.getOrientacao() == Orientacao.HORIZONTAL)
         encaixarAqui(palavra.getPalavra().split(""));
     }
+    
+    finalizar();
   }
   
   private String[] concatenar(String[] arr1, String[] arr2, int posicao){
@@ -120,6 +122,19 @@ public class Mapa {
     
     casas = sas;
   }
+
+  public void finalizar(){
+    String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXWYZ";
+    Random r = new Random();
+    
+    for(int x = 0; x < casas.length; x++){
+      for(int y = 0; y < casas[x].length; y++){
+        if(casas[x][y].equals(".")){
+          casas[x][y] = Character.toString(alfabeto.charAt(r.nextInt(alfabeto.length())));
+        }
+      }
+    }
+  }
   
   @Override
   public String toString(){
@@ -133,15 +148,21 @@ public class Mapa {
   
   public static void main(String[] args) {    
     ArrayList<Palavra> palavras = new ArrayList<>();
-    Palavra p = new Palavra("BUG", Orientacao.HORIZONTAL);
-    Palavra puto = new Palavra("BUG", Orientacao.VERTICAL);
+    palavras.add(new Palavra("ESTETOSCOPIO", Orientacao.VERTICAL));
+    palavras.add(new Palavra("PROFISSIONAIS", Orientacao.VERTICAL));
+    palavras.add(new Palavra("INDIVIDUAL", Orientacao.VERTICAL));
+    palavras.add(new Palavra("AVENTAIS", Orientacao.VERTICAL));
+    palavras.add(new Palavra("AMBIENTES", Orientacao.VERTICAL));
+    palavras.add(new Palavra("PROTEÇÃO", Orientacao.VERTICAL));
+    palavras.add(new Palavra("HOSPITALARES", Orientacao.VERTICAL));
+    palavras.add(new Palavra("SEGURANÇA", Orientacao.VERTICAL));
     
-    for(int i = 0; i< 5; i++){
-      palavras.add(p);
-      palavras.add(puto);
-    }
+    palavras.add(new Palavra("SAÚDE", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("EQUIPAMENTOS", Orientacao.HORIZONTAL));
     
-    Mapa mp = new Mapa(10, 10, palavras);
+    
+    
+    Mapa mp = new Mapa(25, 25, palavras);
     
     mp.alocarPalavras();
     System.out.println(mp);
