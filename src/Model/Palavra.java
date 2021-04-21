@@ -17,9 +17,8 @@ public class Palavra{
   private Orientacao orientacao;
   private boolean descoberta = false;
 
-  public Palavra(String palavra, int[][] position, Orientacao orientacao) {
+  public Palavra(String palavra, Orientacao orientacao) {
     this.palavra = palavra;
-    this.position = position;
     this.orientacao = orientacao;
   }
 
@@ -61,17 +60,17 @@ public class Palavra{
   
   public static void main(String[] args) {
     int[][] posicao = {{0}, {0}};
-    Palavra p = new Palavra("BUG", posicao, Orientacao.HORIZONTAL);
-    ArrayList<Palavra> palavras = new ArrayList<>();
-    palavras.add(p);
-    Mapa mapa = new Mapa(3, 3, palavras);
-    mapa.alocarPalavras();
+//    Palavra p = new Palavra("BUG", posicao, Orientacao.HORIZONTAL);
+//    ArrayList<Palavra> palavras = new ArrayList<>();
+//    palavras.add(p);
+//    Mapa mapa = new Mapa(3, 3, palavras);
+//    mapa.alocarPalavras();
 //    String[][] mapa = 
 //      {{"A","B","C"},{"D","E","F"},{"G","H","I"}};
     
     
     
-    System.out.println(mapa);
+//    System.out.println(mapa);
   }
   
 }
