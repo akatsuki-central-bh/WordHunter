@@ -51,7 +51,17 @@ public class Mapa {
     Random randomico = new Random();
     
     for(Palavra palavra : palavras){
-      encaixarAqui(palavra.getPalavra().split(""));
+      if(palavra.getOrientacao() == Orientacao.VERTICAL){
+        encaixarAqui(palavra.getPalavra().split(""));
+        
+      }
+        
+    }
+    girar();
+    
+    for(Palavra palavra : palavras){
+      if(palavra.getOrientacao() == Orientacao.HORIZONTAL)
+        encaixarAqui(palavra.getPalavra().split(""));
     }
   }
   
@@ -87,7 +97,7 @@ public class Mapa {
     Random randomico = new Random();
     int rangePossivel = largura - palavra.length;
     int linhaIndex = linhaLivre(randomico.nextInt(altura), palavra.length);
-    int colunaIndex = randomico.nextInt(rangePossivel);
+    int colunaIndex = randomico.nextInt(rangePossivel+1);
         
     int range = colunaIndex + palavra.length;
     for(int i = colunaIndex; i < range; i++){
@@ -98,6 +108,17 @@ public class Mapa {
     casas[linhaIndex] = concatenar(casas[linhaIndex], palavra, colunaIndex);
     
     return true;
+  }
+  
+  public void girar(){
+    String[][] sas = new String[altura][largura];
+    for(int x = 0; x < casas.length; x++){
+      for(int y = 0; y < casas[x].length; y++){
+        sas[y][x] = casas[x][y];
+      }
+    }
+    
+    casas = sas;
   }
   
   @Override
@@ -113,14 +134,16 @@ public class Mapa {
   public static void main(String[] args) {    
     ArrayList<Palavra> palavras = new ArrayList<>();
     Palavra p = new Palavra("BUG", Orientacao.HORIZONTAL);
+    Palavra puto = new Palavra("BUG", Orientacao.VERTICAL);
     
-    for(int i = 0; i< 10; i++)
+    for(int i = 0; i< 5; i++){
       palavras.add(p);
+      palavras.add(puto);
+    }
     
     Mapa mp = new Mapa(10, 10, palavras);
     
     mp.alocarPalavras();
     System.out.println(mp);
-    
   }
 }

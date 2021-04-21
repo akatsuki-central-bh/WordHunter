@@ -5,15 +5,14 @@
  */
 package Model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author leanddro
  */
 public class Palavra{
   private String palavra;
-  private int[][] position;
+  private int x;
+  private int y;
   private Orientacao orientacao;
   private boolean descoberta = false;
 
@@ -28,14 +27,6 @@ public class Palavra{
 
   public void setPalavra(String palavra) {
     this.palavra = palavra;
-  }
-
-  public int[][] getPosition() {
-    return position;
-  }
-
-  public void setPosition(int[][] position) {
-    this.position = position;
   }
 
   public Orientacao getOrientacao() {
@@ -57,6 +48,24 @@ public class Palavra{
   public String toString(){
     return palavra;
   }
+
+  public int getX() {
+    return x;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
+  
+  
   
   public static void main(String[] args) {
     int[][] posicao = {{0}, {0}};
