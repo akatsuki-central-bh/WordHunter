@@ -51,44 +51,53 @@ public class Mapa {
     Random randomico = new Random();
     
     for(Palavra palavra : palavras){
-      if(palavra.getOrientacao() == Orientacao.HORIZONTAL){
-        int linha = linhaLivre(randomico.nextInt(altura));
-        
-        if(palavra.getPalavra().length() == this.altura){
-          casas[linha] = palavra.getPalavra().split("");
-          
-        }else if(palavra.getPalavra().length() < this.altura){
-          String[] letras = palavra.getPalavra().split("");
-          int range = largura - letras.length;
-          String[] concat = Arrays.copyOfRange(casas[linha], 0, range);
-          casas[linha] = concatenar(casas[linha], letras, 1);
-          
-        }
-      }
+      encaixarAqui(palavra.getPalavra().split(""));
     }
   }
   
   private String[] concatenar(String[] arr1, String[] arr2, int posicao){
-      int j = 0;
-      for(int i = 0; i < largura-1; i++){
-        if(i >= posicao && j < arr2.length){
-          arr1[i] = arr2[j];
-          j++;
-        }
-          
+    int j = 0;
+    for(int i = 0; i < largura; i++){
+      if(i >= posicao && j <= arr2.length -1){
+        arr1[i] = arr2[j];
+        j++;
       }
-      
-      return arr1;
     }
+
+    return arr1;
+  }
   
-  private int linhaLivre(int n){
+  private int linhaLivre(int n, int tamanho){
     Random randomico = new Random();
+    int contador = 0;
     for(String letra : casas[n]){
+      contador++;
+      if(contador == tamanho){
+        return n;
+      }
+          
       if (!letra.equals(".")){
-        return linhaLivre(randomico.nextInt(largura));
+        return linhaLivre(randomico.nextInt(largura), tamanho);
       }
     }
     return n;
+  }
+  
+  private boolean encaixarAqui(String[] palavra){
+    Random randomico = new Random();
+    int rangePossivel = largura - palavra.length;
+    int linhaIndex = linhaLivre(randomico.nextInt(altura), palavra.length);
+    int colunaIndex = randomico.nextInt(rangePossivel);
+        
+    int range = colunaIndex + palavra.length;
+    for(int i = colunaIndex; i < range; i++){
+      if(!casas[linhaIndex][i].equals("."))
+        return encaixarAqui(palavra);
+    }
+    
+    casas[linhaIndex] = concatenar(casas[linhaIndex], palavra, colunaIndex);
+    
+    return true;
   }
   
   @Override
@@ -101,36 +110,17 @@ public class Mapa {
     return result;
   }
   
-  private int incrementador = 0;
-  public int proximaPosicao(int co){
-    Random randomico = new Random();
-    co -= incrementador;
-    incrementador = randomico.nextInt(3)+1;
-    
-    return co;
-  }
-  
-  public static void main(String[] args) {
-//    int co = 10;
-//    Random randomico = new Random();
-
-//    int a = 0;
-//    while(co-a > 0){
-//      co -= a;
-////      System.out.println(co);
-//      a = randomico.nextInt(3)+1;
-//    }
-    
+  public static void main(String[] args) {    
     ArrayList<Palavra> palavras = new ArrayList<>();
     Palavra p = new Palavra("BUG", Orientacao.HORIZONTAL);
     
-    palavras.add(p);
-    palavras.add(p);
-    palavras.add(p);
+    for(int i = 0; i< 10; i++)
+      palavras.add(p);
     
-    Mapa mp = new Mapa(5, 5, palavras);
+    Mapa mp = new Mapa(10, 10, palavras);
+    
     mp.alocarPalavras();
-    
     System.out.println(mp);
+    
   }
 }
