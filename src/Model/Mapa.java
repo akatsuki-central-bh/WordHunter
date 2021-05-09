@@ -89,17 +89,16 @@ public class Mapa {
   }
  
   
-  private ArrayList<Integer> possiveisCasas(int tamanho, String palavra){
+  private ArrayList<Integer> possiveisCasas(String[] letras){
     ArrayList<Integer> casasi = new ArrayList<>();
-    String[] letras = palavra.split("");
     int contador;
-    
+    int tamanho = letras.length;
     for(int c = 0; c < casas.length; c++){
       contador = 0;
       for(int i = 0; i < casas[c].length; i++){
 //      for(String letra : casas[c]){
         
-        if(casas[c][i].equals(".")){
+        if(casas[c][i].equals(".") || casas[c][i].equals(letras[contador])){
 //          System.out.println(casas[c][i]+".equals("+letras[contador]+")");
           contador++;
         }else
@@ -139,7 +138,7 @@ public class Mapa {
       return false;
     }
     
-    ArrayList<Integer> possiveisCasas = possiveisCasas(letras.length, palavra);
+    ArrayList<Integer> possiveisCasas = possiveisCasas(letras);
     
     if(possiveisCasas.isEmpty()){
       return false;
@@ -151,9 +150,11 @@ public class Mapa {
     int colunaIndex = randomico.nextInt(rangePossivel+1);
         
     int range = colunaIndex + letras.length;
+    int j = 0;
     for(int i = colunaIndex; i < range; i++){
-      if(!casas[linhaIndex][i].equals("."))
+      if(!casas[linhaIndex][i].equals(".") && !casas[linhaIndex][i].equals(letras[j]))
         return encaixarAqui(palavra);
+      j++;
     }
     
     casas[linhaIndex] = concatenar(casas[linhaIndex], letras, colunaIndex);
@@ -199,12 +200,12 @@ public class Mapa {
     ArrayList<Palavra> palavras = new ArrayList<>();
     
     palavras.add(new Palavra("ESTETOSCOPIO", Orientacao.VERTICAL));
-    palavras.add(new Palavra("PROFISSIONAIS", Orientacao.VERTICAL));
+    palavras.add(new Palavra("PROFISIONAIS", Orientacao.VERTICAL));
     palavras.add(new Palavra("INDIVIDUAL", Orientacao.VERTICAL));
     palavras.add(new Palavra("AVENTAIS", Orientacao.VERTICAL));
     palavras.add(new Palavra("AMBIENTES", Orientacao.VERTICAL));
     palavras.add(new Palavra("PROTEÇÃO", Orientacao.VERTICAL));
-    palavras.add(new Palavra("HOSPITALARES", Orientacao.VERTICAL));
+    palavras.add(new Palavra("HOSPITALARS", Orientacao.VERTICAL));
     palavras.add(new Palavra("SEGURANÇA", Orientacao.VERTICAL));
     
     palavras.add(new Palavra("OJOGO", Orientacao.HORIZONTAL));
@@ -213,7 +214,7 @@ public class Mapa {
     palavras.add(new Palavra("BUG", Orientacao.HORIZONTAL));
     
     
-    Mapa mp = new Mapa(13, 13, palavras);
+    Mapa mp = new Mapa(12, 12, palavras);
     mp.alocarPalavras();
     System.out.println(mp);
     
