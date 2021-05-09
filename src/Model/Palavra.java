@@ -65,21 +65,4 @@ public class Palavra{
     this.y = y;
   }
   
-  
-  
-  public static void main(String[] args) {
-    int[][] posicao = {{0}, {0}};
-//    Palavra p = new Palavra("BUG", posicao, Orientacao.HORIZONTAL);
-//    ArrayList<Palavra> palavras = new ArrayList<>();
-//    palavras.add(p);
-//    Mapa mapa = new Mapa(3, 3, palavras);
-//    mapa.alocarPalavras();
-//    String[][] mapa = 
-//      {{"A","B","C"},{"D","E","F"},{"G","H","I"}};
-    
-    
-    
-//    System.out.println(mapa);
-  }
-  
 }
