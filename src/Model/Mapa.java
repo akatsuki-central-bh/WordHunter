@@ -24,27 +24,22 @@ public class Mapa {
   private String[][] casas;
   private ArrayList<Palavra> palavras;
   private int largura, altura;
-  
-  public Mapa(int altura, int largura){
-    this.casas = new String[largura][altura];
-    this.largura = largura;
-    this.altura = altura;
+  private ArrayList<String> alfabeto = new ArrayList<>();
     
-    for(int x = 0; x < largura; x++){
-      String[] linha = new String[largura];
-      for(int y = 0; y < altura; y++){
-        linha[y] = ".";
-      }
-      casas[x] = linha;
-    }
-  }
-  
   public Mapa(int altura, int largura, ArrayList<Palavra> palavras) {
     this.casas = new String[largura][altura];
     this.palavras = palavras;
     
     this.largura = largura;
     this.altura = altura;
+    
+    for(Palavra palavra : palavras){
+      String[] letras = palavra.getPalavra().split("");
+      for(String letra : letras){
+        if(!alfabeto.contains(letra))
+          alfabeto.add(letra);
+      }
+    }
   }
   
   public void limpar(){    
@@ -177,13 +172,13 @@ public class Mapa {
   }
 
   public void finalizar(){
-    String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXWYZ";
+//    String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXWYZ";
     Random r = new Random();
     
     for(int x = 0; x < casas.length; x++){
       for(int y = 0; y < casas[x].length; y++){
         if(casas[x][y].equals(".")){
-          casas[x][y] = Character.toString(alfabeto.charAt(r.nextInt(alfabeto.length())));
+          casas[x][y] = alfabeto.get(r.nextInt(alfabeto.size()));
         }
       }
     }
@@ -199,6 +194,7 @@ public class Mapa {
     return result;
   }
   
+
   public static void main(String[] args) throws FileNotFoundException {    
     
 	Random randomico = new Random();
@@ -221,6 +217,7 @@ public class Mapa {
 	}
     
 	System.out.println("Palavras escolhidas: "+palavras.toString());
+
     Mapa mp = new Mapa(15, 15, palavras);
     
     mp.alocarPalavras();
