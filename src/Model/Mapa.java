@@ -194,7 +194,6 @@ public class Mapa {
     return result;
   }
   
-
   public static void main(String[] args) throws FileNotFoundException {    
     
 	Random randomico = new Random();

@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Random;
+
 /**
  *
  * @author leanddro
@@ -16,9 +18,8 @@ public class Palavra{
   private Orientacao orientacao;
   private boolean descoberta = false;
 
-  public Palavra(String palavra, Orientacao orientacao) {
-    this.palavra = palavra.toUpperCase();
-    this.orientacao = orientacao;
+  public Palavra(String palavra) {
+    setPalavra(palavra);
   }
 
   public String getPalavra() {
@@ -26,7 +27,21 @@ public class Palavra{
   }
 
   public void setPalavra(String palavra) {
-    this.palavra = palavra.toUpperCase();
+    palavra = palavra.toUpperCase();
+    Random r = new Random();
+    StringBuilder sb = new StringBuilder();
+    if(r.nextBoolean()){
+      sb.append(palavra);
+      palavra = sb.reverse().toString();
+    }
+    
+    if(r.nextBoolean()){
+      this.orientacao = Orientacao.HORIZONTAL;
+    }else{
+      this.orientacao = Orientacao.VERTICAL;
+    }
+    
+    this.palavra = palavra;
   }
 
   public Orientacao getOrientacao() {
