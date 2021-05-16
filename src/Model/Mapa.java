@@ -5,9 +5,16 @@
  */
 package Model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -187,22 +194,29 @@ public class Mapa {
     return result;
   }
   
-  public static void main(String[] args) {    
-    ArrayList<Palavra> palavras = new ArrayList<>();
+  public static void main(String[] args) throws FileNotFoundException {    
     
-    palavras.add(new Palavra("atmosfera"));
-    palavras.add(new Palavra("litosfera"));
-    palavras.add(new Palavra("biosfera"));
-    palavras.add(new Palavra("AMBIENTE"));
-    palavras.add(new Palavra("água"));
+	Random randomico = new Random();
+	ArrayList<Palavra> palavras = new ArrayList<>();
+	ArrayList<String> listaPalavras = new ArrayList<String>();
+	
+	FileInputStream entradaArquivo = new FileInputStream(new File("C:\\Users\\Leo\\git\\WordHunter\\src\\Model\\palavrasTXT"));
+	
+	Scanner lerArq = new Scanner(entradaArquivo, "ISO-8859-1");
+	String linha = lerArq.nextLine();
+	String[] palavrasVetor = linha.split(";");
+	
+	while (palavras.size()<9) {
+		String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
+		if (!listaPalavras.contains(palavra)) {
+			listaPalavras.add(palavra);
+			Palavra p = new Palavra(palavra, Orientacao.HORIZONTAL);
+			palavras.add(p);
+		}	
+	}
     
-    palavras.add(new Palavra("ONU"));    
-    palavras.add(new Palavra("rios"));
-    palavras.add(new Palavra("mares"));
-    palavras.add(new Palavra("lagos"));
-    palavras.add(new Palavra("oceanos"));
-    
-    
+	System.out.println("Palavras escolhidas: "+palavras.toString());
+
     Mapa mp = new Mapa(15, 15, palavras);
     
     mp.alocarPalavras();
