@@ -74,7 +74,7 @@ public class Mapa {
       }
     }
     
-    finalizar();
+//    finalizar();
     return true;
   }
   
@@ -199,15 +199,15 @@ public class Mapa {
     ArrayList<Palavra> palavras = new ArrayList<>();
     ArrayList<String> listaPalavras = new ArrayList<String>();
 
-    File entradaArquivo = new File("src/Model/palavrasTXT");
+    File entradaArquivo = new File("src/Model/palavras.txt");
 
-    Scanner lerArq = new Scanner(entradaArquivo, "ISO-8859-1");
+    Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
     String linha = lerArq.nextLine();
     String[] palavrasVetor = linha.split(";");
 
     while (palavras.size()<9) {
       String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
-      if (!listaPalavras.contains(palavra)) {
+      if (!listaPalavras.contains(palavra) && palavra.length() <= 10) {
         listaPalavras.add(palavra);
         Palavra p = new Palavra(palavra);
         palavras.add(p);
