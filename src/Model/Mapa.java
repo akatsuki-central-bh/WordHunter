@@ -190,17 +190,17 @@ public class Mapa {
   public static void main(String[] args) {    
     ArrayList<Palavra> palavras = new ArrayList<>();
     
-    palavras.add(new Palavra("atmosfera", Orientacao.VERTICAL));
-    palavras.add(new Palavra("litosfera", Orientacao.VERTICAL));
-    palavras.add(new Palavra("biosfera", Orientacao.VERTICAL));
-    palavras.add(new Palavra("AMBIENTE", Orientacao.VERTICAL));
-    palavras.add(new Palavra("água", Orientacao.VERTICAL));
+    palavras.add(new Palavra("atmosfera"));
+    palavras.add(new Palavra("litosfera"));
+    palavras.add(new Palavra("biosfera"));
+    palavras.add(new Palavra("AMBIENTE"));
+    palavras.add(new Palavra("água"));
     
-    palavras.add(new Palavra("ONU", Orientacao.HORIZONTAL));    
-    palavras.add(new Palavra("rios", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("mares", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("lagos", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("oceanos", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("ONU"));    
+    palavras.add(new Palavra("rios"));
+    palavras.add(new Palavra("mares"));
+    palavras.add(new Palavra("lagos"));
+    palavras.add(new Palavra("oceanos"));
     
     
     Mapa mp = new Mapa(15, 15, palavras);
