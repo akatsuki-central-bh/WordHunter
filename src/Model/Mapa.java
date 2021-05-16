@@ -52,27 +52,26 @@ public class Mapa {
   
   public boolean alocarPalavras(){
     limpar();
-//    Random randomico = new Random();
     
     for(Palavra palavra : palavras){
       if(palavra.getOrientacao() == Orientacao.VERTICAL){
         if(!encaixarAqui(palavra.getPalavra())){
           return alocarPalavras();
-        }
-          
+        } 
       }
     }
     
     girar();
     
     for(Palavra palavra : palavras){
-      if(palavra.getOrientacao() == Orientacao.HORIZONTAL)
-//        encaixarAqui(palavra.getPalavra().split(""));
+      if(palavra.getOrientacao() == Orientacao.HORIZONTAL){
         if(!encaixarAqui(palavra.getPalavra())){       
           return alocarPalavras();
         }
+      }
     }
-//    finalizar();
+    
+    finalizar();
     return true;
   }
   
@@ -89,20 +88,18 @@ public class Mapa {
   }
  
   
-  private ArrayList<Integer> possiveisCasas(String[] letras){
+  private ArrayList<Integer> possiveisLinhas(String[] letras){
     ArrayList<Integer> casasi = new ArrayList<>();
     int contador;
     int tamanho = letras.length;
     for(int c = 0; c < casas.length; c++){
       contador = 0;
-      for(int i = 0; i < casas[c].length; i++){
-//      for(String letra : casas[c]){
-        
+      for(int i = 0; i < casas[c].length; i++){        
         if(casas[c][i].equals(".") || casas[c][i].equals(letras[contador])){
-//          System.out.println(casas[c][i]+".equals("+letras[contador]+")");
           contador++;
-        }else
+        }else{
           contador = 0;
+        }
         
         if(contador == tamanho){
           casasi.add(c);
@@ -114,48 +111,47 @@ public class Mapa {
     return casasi;
   }
   
-  private boolean temLinhaLivre(int tamanho){
-    int contador;
-    for(String[] casa : casas){
-      contador = 0;
-      for(String letra : casa){
-        contador++;
-        if(contador == tamanho){
-          return true;
+  public ArrayList<Integer> possiveisColunas(String[] letras, int casa) {
+    ArrayList<Integer> casasi = new ArrayList<>();    
+    int rangePossivel = largura - letras.length;
+    
+    for(int i = 0; i < rangePossivel+1; i++){
+      int contador = 0;
+      for(int j = i; j < i+letras.length; j++){
+        if(casas[casa][j].equals(".") || casas[casa][j].equals(letras[contador])){
+          contador++;
+          
+          if(contador == letras.length){
+            casasi.add(i);
+          }
         }
-      }     
+      }
     }
     
-    return false;
+    return casasi;
   }
-  
+    
   private boolean encaixarAqui(String palavra){
     Random randomico = new Random();
     String[] letras = palavra.split("");
-    int rangePossivel = largura - letras.length;
     
-    if(!temLinhaLivre(letras.length)){
+    ArrayList<Integer> possiveisLinhas = possiveisLinhas(letras);
+    
+    if(possiveisLinhas.isEmpty()){
       return false;
     }
     
-    ArrayList<Integer> possiveisCasas = possiveisCasas(letras);
+    int r = randomico.nextInt(possiveisLinhas.size());    
+    int linhaIndex = possiveisLinhas.get(r);
     
-    if(possiveisCasas.isEmpty()){
+    ArrayList<Integer> possiveisColunas = possiveisColunas(letras, linhaIndex);
+    
+    if(possiveisColunas.isEmpty()){
       return false;
     }
     
-    int r = randomico.nextInt(possiveisCasas.size());    
-    int linhaIndex = possiveisCasas.get(r);
-    
-    int colunaIndex = randomico.nextInt(rangePossivel+1);
-        
-    int range = colunaIndex + letras.length;
-    int j = 0;
-    for(int i = colunaIndex; i < range; i++){
-      if(!casas[linhaIndex][i].equals(".") && !casas[linhaIndex][i].equals(letras[j]))
-        return encaixarAqui(palavra);
-      j++;
-    }
+    r = randomico.nextInt(possiveisColunas.size());    
+    int colunaIndex = possiveisColunas.get(r);
     
     casas[linhaIndex] = concatenar(casas[linhaIndex], letras, colunaIndex);
     
@@ -163,14 +159,14 @@ public class Mapa {
   }
   
   public void girar(){
-    String[][] sas = new String[altura][largura];
+    String[][] mapa = new String[altura][largura];
     for(int x = 0; x < casas.length; x++){
       for(int y = 0; y < casas[x].length; y++){
-        sas[y][x] = casas[x][y];
+        mapa[y][x] = casas[x][y];
       }
     }
     
-    casas = sas;
+    casas = mapa;
   }
 
   public void finalizar(){
@@ -199,28 +195,21 @@ public class Mapa {
   public static void main(String[] args) {    
     ArrayList<Palavra> palavras = new ArrayList<>();
     
-    palavras.add(new Palavra("ESTETOSCOPIO", Orientacao.VERTICAL));
-    palavras.add(new Palavra("PROFISIONAIS", Orientacao.VERTICAL));
-    palavras.add(new Palavra("INDIVIDUAL", Orientacao.VERTICAL));
-    palavras.add(new Palavra("AVENTAIS", Orientacao.VERTICAL));
-    palavras.add(new Palavra("AMBIENTES", Orientacao.VERTICAL));
-    palavras.add(new Palavra("PROTEÇÃO", Orientacao.VERTICAL));
-    palavras.add(new Palavra("HOSPITALARS", Orientacao.VERTICAL));
-    palavras.add(new Palavra("SEGURANÇA", Orientacao.VERTICAL));
+    palavras.add(new Palavra("atmosfera", Orientacao.VERTICAL));
+    palavras.add(new Palavra("litosfera", Orientacao.VERTICAL));
+    palavras.add(new Palavra("biosfera", Orientacao.VERTICAL));
+    palavras.add(new Palavra("AMBIENTE", Orientacao.VERTICAL));
     
-    palavras.add(new Palavra("OJOGO", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("SAÚDE", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("EQUIPAMENTOS", Orientacao.HORIZONTAL));
-    palavras.add(new Palavra("BUG", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("ONU", Orientacao.HORIZONTAL));    
+    palavras.add(new Palavra("rios", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("mares", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("lagos", Orientacao.HORIZONTAL));
+    palavras.add(new Palavra("oceanos", Orientacao.HORIZONTAL));
     
     
-    Mapa mp = new Mapa(12, 12, palavras);
+    Mapa mp = new Mapa(15, 15, palavras);
+    
     mp.alocarPalavras();
     System.out.println(mp);
-    
-    // 
-    
-    
-    
   }
 }

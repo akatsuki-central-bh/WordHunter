@@ -17,7 +17,7 @@ public class Palavra{
   private boolean descoberta = false;
 
   public Palavra(String palavra, Orientacao orientacao) {
-    this.palavra = palavra;
+    this.palavra = palavra.toUpperCase();
     this.orientacao = orientacao;
   }
 
@@ -26,7 +26,7 @@ public class Palavra{
   }
 
   public void setPalavra(String palavra) {
-    this.palavra = palavra;
+    this.palavra = palavra.toUpperCase();
   }
 
   public Orientacao getOrientacao() {
