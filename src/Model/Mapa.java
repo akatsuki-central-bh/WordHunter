@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.objects.NativeDebug;
 
 /**
  *
@@ -172,7 +173,6 @@ public class Mapa {
   }
 
   public void finalizar(){
-//    String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVXWYZ";
     Random r = new Random();
     
     for(int x = 0; x < casas.length; x++){
@@ -194,28 +194,27 @@ public class Mapa {
     return result;
   }
   
-  public static void main(String[] args) throws FileNotFoundException {    
-    
-	Random randomico = new Random();
-	ArrayList<Palavra> palavras = new ArrayList<>();
-	ArrayList<String> listaPalavras = new ArrayList<String>();
-	
-	FileInputStream entradaArquivo = new FileInputStream(new File("C:\\Users\\Leo\\git\\WordHunter\\src\\Model\\palavrasTXT"));
-	
-	Scanner lerArq = new Scanner(entradaArquivo, "ISO-8859-1");
-	String linha = lerArq.nextLine();
-	String[] palavrasVetor = linha.split(";");
-	
-	while (palavras.size()<9) {
-		String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
-		if (!listaPalavras.contains(palavra)) {
-			listaPalavras.add(palavra);
-			Palavra p = new Palavra(palavra, Orientacao.HORIZONTAL);
-			palavras.add(p);
-		}	
-	}
-    
-	System.out.println("Palavras escolhidas: "+palavras.toString());
+  public static void main(String[] args) throws FileNotFoundException {
+    Random randomico = new Random();
+    ArrayList<Palavra> palavras = new ArrayList<>();
+    ArrayList<String> listaPalavras = new ArrayList<String>();
+
+    File entradaArquivo = new File("src/Model/palavrasTXT");
+
+    Scanner lerArq = new Scanner(entradaArquivo, "ISO-8859-1");
+    String linha = lerArq.nextLine();
+    String[] palavrasVetor = linha.split(";");
+
+    while (palavras.size()<9) {
+      String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
+      if (!listaPalavras.contains(palavra)) {
+        listaPalavras.add(palavra);
+        Palavra p = new Palavra(palavra);
+        palavras.add(p);
+      }	
+    }
+
+    System.out.println("Palavras escolhidas: "+palavras.toString());
 
     Mapa mp = new Mapa(15, 15, palavras);
     

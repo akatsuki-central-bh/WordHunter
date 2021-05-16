@@ -23,17 +23,20 @@ public class Palavra{
   }
 
   public String getPalavra() {
+    StringBuilder sb = new StringBuilder();
+    Random r = new Random();
+    
+    if(r.nextBoolean()){
+      sb.append(palavra);
+      return sb.reverse().toString();
+    }
     return palavra;
   }
 
   public void setPalavra(String palavra) {
     palavra = palavra.toUpperCase();
     Random r = new Random();
-    StringBuilder sb = new StringBuilder();
-    if(r.nextBoolean()){
-      sb.append(palavra);
-      palavra = sb.reverse().toString();
-    }
+    
     
     if(r.nextBoolean()){
       this.orientacao = Orientacao.HORIZONTAL;
