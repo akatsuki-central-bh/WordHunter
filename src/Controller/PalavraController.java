@@ -51,5 +51,4 @@ public class PalavraController {
 	public static String listarPalavras() {
 		return palavras.toString();
 	}
-	
 }
