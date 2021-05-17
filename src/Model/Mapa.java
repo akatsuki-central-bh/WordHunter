@@ -199,7 +199,7 @@ public class Mapa {
     ArrayList<Palavra> palavras = new ArrayList<>();
     ArrayList<String> listaPalavras = new ArrayList<String>();
 
-    File entradaArquivo = new File("src/Model/palavras.txt");
+    File entradaArquivo = new File("src/Assets/palavras.txt");
 
     Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
     String linha = lerArq.nextLine();
