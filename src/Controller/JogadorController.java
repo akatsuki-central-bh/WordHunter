@@ -5,31 +5,76 @@
  */
 package Controller;
 
-import Helpers.compararCom;
+import Helpers.Recorde;
 import Model.Jogador;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author leanddro
  */
-public class JogadorController {
+public class JogadorController implements Serializable{
   public static ArrayList<Jogador> jogadores = new ArrayList<>();
   
-  public static void ordenar(){
-    compararCom cc = new compararCom();
+  public static ArrayList<Jogador> rankiar(){
+    load();
+    Recorde cc = new Recorde();
     jogadores.sort(cc);
+    return jogadores;
   }
   
-  public static void main(String[] args) {
-    JogadorController.jogadores.add(new Jogador("leanddro", 220.00));
-    JogadorController.jogadores.add(new Jogador("vinicius", 120.00));
-    JogadorController.jogadores.add(new Jogador("jonata", 130.00));
-    JogadorController.jogadores.add(new Jogador("luchaos", 400.00));
+  public static void add(Jogador jogador){
+    load();
+    jogadores.add(jogador);
+    save();
+  }
+  
+  private static void load(){
+    try{
+      FileInputStream arquivoLeitura = new FileInputStream("jogadores.txt");
+      ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura);
+      jogadores = (ArrayList<Jogador>) objLeitura.readObject();
+      objLeitura.close();
+      arquivoLeitura.close();      
+    } catch (FileNotFoundException ex) {
+      Logger.getLogger(JogadorController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+      Logger.getLogger(JogadorController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+      Logger.getLogger(JogadorController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+  
+  private static void save(){
     
+    try{
+      File f = new File("jogadores.txt");
+      FileOutputStream arquivoGrav = new FileOutputStream("jogadores.txt");
+      
+      ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
+      //Grava o objeto cliente no arquivo
+      objGravar.writeObject(jogadores);
+      objGravar.flush();
+      objGravar.close();
+      arquivoGrav.flush();
+      arquivoGrav.close();
+      System.out.println("Objeto gravado com sucesso!");
     
-    System.out.println(JogadorController.jogadores);
-    JogadorController.ordenar();
-    System.out.println(JogadorController.jogadores);
+    } catch (FileNotFoundException ex) {
+    
+    } catch (IOException ex) {
+      
+    }
   }
 }

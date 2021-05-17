@@ -12,7 +12,7 @@ import java.util.Comparator;
  *
  * @author leanddro
  */
-public class compararCom implements Comparator<Jogador> {
+public class Recorde implements Comparator<Jogador> {
 
   @Override
   public int compare(Jogador t1, Jogador t2) {
