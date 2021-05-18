@@ -15,7 +15,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.objects.NativeDebug;
+
+import Controller.PalavraController;
 
 /**
  *
@@ -74,7 +75,7 @@ public class Mapa {
       }
     }
     
-//    finalizar();
+   finalizar();
     return true;
   }
   
@@ -195,28 +196,12 @@ public class Mapa {
   }
   
   public static void main(String[] args) throws FileNotFoundException {
-    Random randomico = new Random();
-    ArrayList<Palavra> palavras = new ArrayList<>();
-    ArrayList<String> listaPalavras = new ArrayList<String>();
 
-    File entradaArquivo = new File("src/Assets/palavras.txt");
-
-    Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
-    String linha = lerArq.nextLine();
-    String[] palavrasVetor = linha.split(";");
-
-    while (palavras.size()<9) {
-      String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
-      if (!listaPalavras.contains(palavra) && palavra.length() <= 10) {
-        listaPalavras.add(palavra);
-        Palavra p = new Palavra(palavra);
-        palavras.add(p);
-      }	
-    }
-
-    System.out.println("Palavras escolhidas: "+palavras.toString());
-
-    Mapa mp = new Mapa(15, 15, palavras);
+	PalavraController.gerarPalavras();
+    
+	System.out.println("Palavras escolhidas: "+PalavraController.listarPalavras());
+	  
+    Mapa mp = new Mapa(15, 15, PalavraController.getArrayPalavras());
     
     mp.alocarPalavras();
     System.out.println(mp);
