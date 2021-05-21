@@ -21,7 +21,7 @@ public class PalavraController {
 	private static ArrayList<Palavra> palavras = new ArrayList<Palavra>();
 	
 	public static void gerarPalavras() throws FileNotFoundException {
-		File entradaArquivo = new File("src/Model/palavras.txt");
+		File entradaArquivo = new File("src/Data/palavras.txt");
 		Random randomico = new Random();
 		ArrayList<String> listaPalavras = new ArrayList<String>();
 		

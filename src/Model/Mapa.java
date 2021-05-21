@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import Controller.DificuldadeController;
 import Controller.PalavraController;
 
 /**
@@ -196,12 +197,18 @@ public class Mapa {
   }
   
   public static void main(String[] args) throws FileNotFoundException {
-
+	Dificuldade dificuldade = Dificuldade.FACIL;
+	
+	DificuldadeController.gerarDificuldade(dificuldade);
 	PalavraController.gerarPalavras();
+	
+	System.out.println("Dificuldade: "+dificuldade);
+    System.out.println("Linhas: "+DificuldadeController.getLinhas());
+    System.out.println("C: "+DificuldadeController.getColunas());
     
 	System.out.println("Palavras escolhidas: "+PalavraController.listarPalavras());
 	  
-    Mapa mp = new Mapa(15, 15, PalavraController.getArrayPalavras());
+    Mapa mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
     
     mp.alocarPalavras();
     System.out.println(mp);
