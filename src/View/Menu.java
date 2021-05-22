@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JFrame {
 		getContentPane().add(btn_Recordes);
 
 		btn_Creditos.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-		btn_Creditos.setText("CRÉDITOS");
+		btn_Creditos.setText("CRï¿½DITOS");
 		getContentPane().add(btn_Creditos);
 		
 		btn_Recordes.addActionListener(new ActionListener() {

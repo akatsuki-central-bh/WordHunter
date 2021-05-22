@@ -10,6 +10,7 @@ import Model.Jogador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -57,7 +58,7 @@ public class Ranking extends javax.swing.JFrame {
 		
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-		}, new String[] { "Posição", "Apelido", "Tempo" }) {
+		}, new String[] { "Posiï¿½ï¿½o", "Apelido", "Tempo" }) {
 			Class[] types = new Class[] { java.lang.Object.class, java.lang.String.class, java.lang.Double.class };
 			boolean[] canEdit = new boolean[] { false, false, false };
 
