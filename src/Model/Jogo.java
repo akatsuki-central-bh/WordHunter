@@ -10,5 +10,5 @@ package Model;
  * @author leanddro
  */
 public class Jogo {
-  
+
 }
