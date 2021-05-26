@@ -34,6 +34,7 @@ public class ButtonMenu extends JButton{
 	
 	public ButtonMenu(String textButton) {
 		super();
+		this.setFocusable(false);
 		this.setText(textButton);
 		this.setContentAreaFilled(false);
 		this.setFont(new Font("Roboto Light", Font.PLAIN, 25));
