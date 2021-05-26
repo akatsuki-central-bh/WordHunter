@@ -95,7 +95,7 @@ public class Jogo extends JFrame {
         contentPane.add(pnlTitulo);
         pnlTitulo.setLayout(new GridLayout(0, 1, 0, 0));
         
-        JLabel lblTitulo = new JLabel("CAÇA PALAVRAS");
+        JLabel lblTitulo = new JLabel("CAï¿½A PALAVRAS");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setBackground(Color.BLUE);
         lblTitulo.setFont(new Font("Dialog", Font.BOLD, 21));
@@ -175,12 +175,12 @@ public class Jogo extends JFrame {
                         textAreaAcertos.append(palavra + "\n");
                         acertos++;
                         p.setDescoberta(true);
-                        System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
+                        System.out.println("Palavra: "+p.getPalavra()+" Descoberta: "+p.isDescoberta()+"\n");
                         System.out.println("Acertos por rodada: "+acertos);
                     }
                     digitarPalvra.setText("");
                     if (acertos == 5) {
-                    	JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
+                    	JOptionPane.showMessageDialog(null, "Parabï¿½ns vocï¿½ venceu!");
                     	dispose();
                     	Principal.menu.setVisible(true);
                     }
@@ -231,12 +231,12 @@ public class Jogo extends JFrame {
                     textAreaAcertos.append(palavra + "\n");
                     acertos++;
                     p.setDescoberta(true);
-                    System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
+                    System.out.println("Palavra: "+p.getPalavra()+" Descoberta: "+p.isDescoberta()+"\n");
                     System.out.println("Acertos por rodada: "+acertos);
                 }
                 digitarPalvra.setText("");
                 if (acertos == 5) {
-                	JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
+                	JOptionPane.showMessageDialog(null, "Parabï¿½ns vocï¿½ venceu!");
                 	dispose();
                 	Principal.menu.setVisible(true);
                 }

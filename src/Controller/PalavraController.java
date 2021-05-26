@@ -80,7 +80,7 @@ public class PalavraController {
   public static Palavra getPalavra (String text) {
 	  Palavra palavra = null;
 	  for (Palavra p : palavras) {
-		  if (p.getPalavra1().equalsIgnoreCase(text.toUpperCase())) {
+		  if (p.getPalavra().equalsIgnoreCase(text.toUpperCase())) {
 			  palavra = p;
 		  }
 	  }
