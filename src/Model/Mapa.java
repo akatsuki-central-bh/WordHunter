@@ -86,7 +86,7 @@ public class Mapa {
             }
         }
 
-//    finalizar();
+        finalizar();
         return true;
     }
 
@@ -174,6 +174,12 @@ public class Mapa {
             palavra.setPosicaoInicial(new Posicao(colunaIndex, linhaIndex));
             palavra.setPosicaoFinal(new Posicao(colunaIndex + letras.length - 1, linhaIndex));
         }
+        
+        System.out.println("-----------");
+        System.out.println("Palavra: " + palavra.toString());
+        System.out.println("Posicao inicial: " + palavra.getPosicaoInicial());
+        System.out.println("Posicao final: " + palavra.getPosicaoFinal());
+        System.out.println("Orientação: " + palavra.getOrientacao());
 
         casas[linhaIndex] = concatenar(casas[linhaIndex], letras, colunaIndex);
 
