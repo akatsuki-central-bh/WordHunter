@@ -8,36 +8,39 @@ package View;
 import Controller.JogadorController;
 import Model.Jogador;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
-import javax.swing.JFrame;
+
+import javax.swing.BorderFactory;
+import javax.swing.JTable;
+import javax.swing.border.Border;
+import javax.swing.plaf.BorderUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+import java.awt.ComponentOrientation;
+import java.awt.Cursor;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author leanddro
  */
-public class Ranking extends JFrame {
-    private JFrame frameAnterior;
+public class Ranking extends javax.swing.JFrame {
     /**
      * Creates new form Ranking
      */
-    public Ranking(JFrame frameAnterior) {
-        initComponents();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        ArrayList<Jogador> jogadores = JogadorController.rankiar();
-
-        int posicao = 1;
-        for (Jogador jogador : jogadores) {
-            model.addRow(new Object[]{posicao, jogador.getApelido(), jogador.getTempo()});
-            posicao++;
-        }
-
-    }
-
     public Ranking() {
         initComponents();
 
@@ -49,7 +52,6 @@ public class Ranking extends JFrame {
             model.addRow(new Object[]{posicao, jogador.getApelido(), jogador.getTempo()});
             posicao++;
         }
-
     }
 
     /**
@@ -64,32 +66,81 @@ public class Ranking extends JFrame {
 
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
+		jTable1.setShowGrid(false);
+		jTable1.setFocusable(false);
+		jTable1.setFillsViewportHeight(true);
+		jTable1.setBorder(new EmptyBorder(0, 0, 0, 0));
+		jTable1.setIntercellSpacing(new Dimension(0, 0));
+		jTable1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		jTable1.setGridColor(Color.WHITE);
+		jTable1.setShowVerticalLines(false);
+		jTable1.setRowMargin(3);
+		jTable1.setRowHeight(25);
 		btn_Ok = new javax.swing.JButton();
+		btn_Ok.setForeground(Color.BLACK);
+		btn_Ok.setFocusable(false);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Ranking");
+		setMinimumSize(new Dimension(800,600));
 		setLocation(600, 150);
+		getContentPane().setBackground(Color.WHITE);
 		
-		
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
-
-		}, new String[] { "Posi��o", "Apelido", "Tempo" }) {
-			Class[] types = new Class[] { java.lang.Object.class, java.lang.String.class, java.lang.Double.class };
-			boolean[] canEdit = new boolean[] { false, false, false };
-
-			public Class getColumnClass(int columnIndex) {
-				return types[columnIndex];
+		//CORES----------------------------
+		Color SelectColor = new Color(232,57, 95);
+		Color headerColor = new Color (32,136,203);
+		//
+		Border borda = BorderFactory.createMatteBorder(0, 0,0,0, Color.WHITE);
+		Border bordaButtonVoltar = BorderFactory.createMatteBorder(1, 1,1,1,headerColor);
+		Border bordaButtonVoltarHover = BorderFactory.createMatteBorder(1, 1,1,1, SelectColor);
+		//---------------------------------
+		jScrollPane1.setBorder(borda);
+		//BTN ESTILO
+		btn_Ok.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btn_Ok.setBounds(30, 30, 50, 30);
+		btn_Ok.setBorder(bordaButtonVoltar);
+		btn_Ok.setContentAreaFilled(false);
+		btn_Ok.setForeground(headerColor);
+		btn_Ok.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn_Ok.setBorder(bordaButtonVoltarHover);
+				btn_Ok.setForeground(SelectColor);
 			}
-
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit[columnIndex];
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btn_Ok.setForeground(headerColor);
+				btn_Ok.setBorder(bordaButtonVoltar);
 			}
 		});
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		//HEADER TABLLE
+		JTableHeader header = jTable1.getTableHeader();
+		header.setReorderingAllowed(false);
+		header.setFont(new Font("Roboto Light", Font.PLAIN, 18));
+		header.setOpaque(true);
+		header.isBackgroundSet();
+		header.setBorder(borda);
+		header.setResizingAllowed(true);
+		header.setBackground(headerColor);
+		header.setForeground(Color.WHITE);
+		//BODY TABLE
+		jTable1.setBackground(Color.WHITE);
+		jTable1.setSelectionBackground(SelectColor);
+		jTable1.setSelectionForeground(Color.WHITE);
+		//
+		jTable1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Posi\u00E7\u00E3o", "Apelido", "Tempo"
+			}
+		));
+		jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		jScrollPane1.setViewportView(jTable1);
 
-		btn_Ok.setText("Ok");
+		btn_Ok.setText("VOLTAR");
 		btn_Ok.addActionListener(new ActionListener() {
+			
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,23 +149,29 @@ public class Ranking extends JFrame {
 			}
 		});
 		
-
+		
+		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap(703, Short.MAX_VALUE)
+					.addComponent(btn_Ok)
+					.addContainerGap())
+				.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(layout.createSequentialGroup()
+					.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btn_Ok)
+					.addContainerGap())
+		);
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-								layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(btn_Ok)))
-				.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(btn_Ok)
-						.addContainerGap()));
 
 		pack();
+		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -155,9 +212,8 @@ public class Ranking extends JFrame {
         });
     }
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
+	// Variables declaration - do not modify                     
 	private javax.swing.JButton btn_Ok;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTable jTable1;
-	// End of variables declaration//GEN-END:variables
 }

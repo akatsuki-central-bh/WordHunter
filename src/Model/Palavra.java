@@ -11,76 +11,94 @@ import java.util.Random;
  *
  * @author leanddro
  */
-public class Palavra{
-  private String palavra;
-  private int x;
-  private int y;
-  private Orientacao orientacao;
-  private boolean descoberta = false;
+public class Palavra {
 
-  public Palavra(String palavra) {
-    setPalavra(palavra);
-  }
+    private String palavra;
+    private int x;
+    private int y;
+    private Posicao posicaoInicial;
+    private Posicao posicaoFinal;
+    private Orientacao orientacao;
+    private boolean descoberta = false;
 
-  public String getPalavra() {
-//    StringBuilder sb = new StringBuilder();
-//    Random r = new Random();
-//    
-//    if(r.nextBoolean()){
-//      sb.append(palavra);
-//      return sb.reverse().toString();
-//    }
-    return palavra;
-  }
-
-  public void setPalavra(String palavra) {
-    palavra = palavra.toUpperCase();
-    Random r = new Random();
-    
-    
-    if(r.nextBoolean()){
-      this.orientacao = Orientacao.HORIZONTAL;
-    }else{
-      this.orientacao = Orientacao.VERTICAL;
+    public Palavra(String palavra) {
+        setPalavra(palavra);
     }
-    
-    this.palavra = palavra;
-  }
 
-  public Orientacao getOrientacao() {
-    return orientacao;
-  }
+    public String getPalavra() {
+        StringBuilder sb = new StringBuilder();
+        Random r = new Random();
 
-  public void setOrientacao(Orientacao orientacao) {
-    this.orientacao = orientacao;
-  }
+        if (r.nextBoolean()) {
+            sb.append(palavra);
+            return sb.reverse().toString();
+        }
+        return palavra;
+    }
 
-  public boolean isDescoberta() {
-    return descoberta;
-  }
+    public void setPalavra(String palavra) {
+        palavra = palavra.toUpperCase();
+        Random r = new Random();
 
-  public void setDescoberta(boolean descoberta) {
-    this.descoberta = descoberta;
-  }
-  
-  public String toString(){
-    return palavra;
-  }
+        if (r.nextBoolean()) {
+            this.orientacao = Orientacao.HORIZONTAL;
+        } else {
+            this.orientacao = Orientacao.VERTICAL;
+        }
 
-  public int getX() {
-    return x;
-  }
+        this.palavra = palavra;
+    }
 
-  public void setX(int x) {
-    this.x = x;
-  }
+    public Orientacao getOrientacao() {
+        return orientacao;
+    }
 
-  public int getY() {
-    return y;
-  }
+    public void setOrientacao(Orientacao orientacao) {
+        this.orientacao = orientacao;
+    }
 
-  public void setY(int y) {
-    this.y = y;
-  }
-  
+    public boolean isDescoberta() {
+        return descoberta;
+    }
+
+    public void setDescoberta(boolean descoberta) {
+        this.descoberta = descoberta;
+    }
+
+    public String toString() {
+        return palavra;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Posicao getPosicaoInicial() {
+        return posicaoInicial;
+    }
+
+    public void setPosicaoInicial(Posicao posicaoInicial) {
+        this.posicaoInicial = posicaoInicial;
+    }
+
+    public Posicao getPosicaoFinal() {
+        return posicaoFinal;
+    }
+
+    public void setPosicaoFinal(Posicao posicaoFinal) {
+        this.posicaoFinal = posicaoFinal;
+    }
+
 }

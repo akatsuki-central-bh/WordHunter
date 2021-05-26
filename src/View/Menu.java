@@ -1,8 +1,22 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+import java.awt.GridLayout;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -23,44 +37,94 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setMinimumSize(new Dimension(800, 600));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(5, 1, 0, 10));
-
-        jLabel1.setFont(new java.awt.Font("Lato Black", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WORD HUNTER");
-        getContentPane().add(jLabel1);
-
-        jButton4.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jButton4.setText("JOGAR");
-        getContentPane().add(jButton4);
-
-        jButton5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jButton5.setText("RECORDES");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5);
-
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jButton1.setText("CRÉDITOS");
-        getContentPane().add(jButton1);
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Ranking ranking = new Ranking(this);
-        ranking.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jButton5ActionPerformed
+		//PALETA DE CORES PUPLE
+		  Color principalColor = Color.WHITE; 
+		  Color tituloFundoColor = new Color(32,136,203);
+		  Color textoColor = Color.WHITE;
+		 
+		//PALETA DE CORES DARK
+		/*
+		 * Color principalColor = new Color(21,21,21); Color textoColor =
+		 * Color.LIGHT_GRAY;
+		 */
+		//
+		setVisible(true);
+		setResizable(false);
+		pack();
+		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+		
+		JPanel panelTitulo = new JPanel();
+		panelTitulo.setBounds(0, 0, 784, 100);
+		getContentPane().add(panelTitulo);
+		panelTitulo.setLayout(new GridLayout(0, 1, 0, 0));
+		panelTitulo.setBackground(tituloFundoColor);
+		
+		JLabel lblTitulo = new JLabel("WORD HUNTER");
+		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 46));
+		lblTitulo.setForeground(textoColor);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		panelTitulo.add(lblTitulo);
+		
+		JPanel panelParteDeBaixo = new JPanel();
+		panelParteDeBaixo.setBounds(0, 100, 784, 461);
+		getContentPane().add(panelParteDeBaixo);
+		panelParteDeBaixo.setLayout(new GridLayout(0, 3, 0, 0));
+		panelParteDeBaixo.setBackground(principalColor);
+		
+		JPanel panelBaixoEsqueda = new JPanel();
+		panelBaixoEsqueda.setBackground(principalColor);
+		panelParteDeBaixo.add(panelBaixoEsqueda);
+		
+		JPanel panelBtns = new JPanel();
+		panelBtns.setBackground(principalColor);
+		panelParteDeBaixo.add(panelBtns);
+		panelBtns.setLayout(null);
+		//BUTTON JOGAR
+		JButton btn_Jogar = new ButtonMenu("JOGAR");
+		
+		panelBtns.add(btn_Jogar);
+		//BUTTON RECORDES
+		JButton btn_Recordes = new ButtonMenu("RECORDES");
+		btn_Recordes.setBounds(0, 150, 261, 73);
+		panelBtns.add(btn_Recordes);
+		//BUTTON CREDITOS
+		JButton btn_Creditos = new ButtonMenu("CRÉDITOS");
+		btn_Creditos.setBounds(0, 270, 261, 73);
+		panelBtns.add(btn_Creditos);
+		//
+		JPanel panelBaixoDireita = new JPanel();
+		panelBaixoDireita.setBackground(principalColor);
+		panelParteDeBaixo.add(panelBaixoDireita);
+		panelBaixoDireita.setLayout(null);
+		
+		btn_Recordes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Ranking ranking = new Ranking();
+				ranking.setVisible(true);
+				setVisible(false);
+			}
+		});
+		
+		btn_Jogar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Jogo jogo = new Jogo();
+				jogo.setVisible(true);
+				setVisible(false);
+				
+			}
+		});
+		
+		setVisible(true);
+		pack();
+    
+	}// </editor-fold>//GEN-END:initComponents
 
 	/**
 	 * @param args the command line arguments
@@ -100,10 +164,9 @@ public class Menu extends javax.swing.JFrame {
 		});
 	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    // End of variables declaration//GEN-END:variables
+	/*
+	 * // Variables declaration - do not modify//GEN-BEGIN:variables private
+	 * javax.swing.JButton btn_Creditos; private javax.swing.JButton btn_Jogar;
+	 * private javax.swing.JButton btn_Recordes; private javax.swing.JLabel jLabel1;
+	 */
 }
