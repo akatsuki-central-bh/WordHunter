@@ -12,6 +12,7 @@ import Controller.PalavraController;
 import Model.Dificuldade;
 import Model.Mapa;
 import Model.Palavra;
+import Model.Posicao;
 
 import javax.swing.GroupLayout.Alignment;
 
@@ -105,9 +106,10 @@ public class Jogo extends JFrame {
         pnlMapa.setBounds(0, 50, 600, 521);
         pnlMapa.setLayout(new GridLayout(linhas, colunas, 0, 0));
         
-		 for(int i=0; i<colunas; i++) {
-			 for(int j=0;j<linhas; j++) {
-				 pnlMapa.add(new LabelMapa(mp.getCasas()[i][j])); } 
+		 for(int i=0; i<linhas; i++) {
+			 for(int j=0;j<colunas; j++) {
+				 pnlMapa.add(new LabelMapa(mp.getCasas()[i][j],new Posicao(j,i)));
+				 } 
 			 }
         
         

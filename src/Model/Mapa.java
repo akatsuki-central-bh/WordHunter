@@ -171,8 +171,8 @@ public class Mapa {
             palavra.setPosicaoInicial(new Posicao(linhaIndex, colunaIndex));
             palavra.setPosicaoFinal(new Posicao(linhaIndex, colunaIndex + letras.length - 1));
         } else if (palavra.getOrientacao() == Orientacao.VERTICAL) {
-            palavra.setPosicaoInicial(new Posicao(colunaIndex, linhaIndex));
-            palavra.setPosicaoFinal(new Posicao(colunaIndex + letras.length - 1, linhaIndex));
+            palavra.setPosicaoInicial(new Posicao(linhaIndex,colunaIndex ));
+            palavra.setPosicaoFinal(new Posicao(linhaIndex + letras.length - 1, colunaIndex));
         }
         
         System.out.println("-----------");
