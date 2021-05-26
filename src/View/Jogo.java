@@ -90,7 +90,7 @@ public class Jogo extends JFrame {
         contentPane.add(pnlTitulo);
         pnlTitulo.setLayout(new GridLayout(0, 1, 0, 0));
 
-        JLabel lblTitulo = new JLabel("CA�A PALAVRAS");
+        JLabel lblTitulo = new JLabel("CAÇA PALAVRAS");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setBackground(Color.BLUE);
         lblTitulo.setFont(new Font("Dialog", Font.BOLD, 21));
@@ -161,7 +161,7 @@ public class Jogo extends JFrame {
                     if (acertos == 5) {
                         cnt.interrupt();
                         String nick = JOptionPane.showInputDialog("Digite seu nick:");
-                        JogadorController.add(new Jogador(nick, cnt.getTempo()));
+                        JogadorController.add(new Jogador(nick, cnt.getTempo(), SelecaoDificuldade.getDificuldade()));
                         JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
                         dispose();
                         Principal.menu.setVisible(true);
@@ -221,7 +221,7 @@ public class Jogo extends JFrame {
                 }
                 digitarPalvra.setText("");
                 if (acertos == 5) {
-                    JOptionPane.showMessageDialog(null, "Parab�ns voc� venceu!");
+                    JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
                     dispose();
                     Principal.menu.setVisible(true);
                 }
