@@ -21,69 +21,69 @@ import java.util.logging.Logger;
  */
 public class PalavraController {
 
-  private static ArrayList<Palavra> palavras = new ArrayList<Palavra>();
+    private static ArrayList<Palavra> palavras = new ArrayList<>();
 
-  public static void gerarPalavras() {
-    try {
-      
-      File entradaArquivo = new File("src/Data/palavras.txt");
-      Random randomico = new Random();
-      ArrayList<String> listaPalavras = new ArrayList<String>();
-      
-      Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
-      String linha = lerArq.nextLine();
-      String[] palavrasVetor = linha.split(";");
-      
-      if (palavras.size()==5) {
-    	  palavras.clear();
-      }
-      
-      while (palavras.size() < 5) {
-        String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
-        if (!listaPalavras.contains(palavra) && palavra.length() <= 10) {
-          listaPalavras.add(palavra);
-          Palavra p = new Palavra(palavra);
-          palavras.add(p);
+    public static void gerarPalavras() {
+        try {
+
+            File entradaArquivo = new File("src/Data/palavras.txt");
+            Random randomico = new Random();
+            ArrayList<String> listaPalavras = new ArrayList<>();
+
+            Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
+            String linha = lerArq.nextLine();
+            String[] palavrasVetor = linha.split(";");
+
+            if (palavras.size() == 5) {
+                palavras.clear();
+            }
+
+            while (palavras.size() < 5) {
+                String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
+                if (!listaPalavras.contains(palavra) && palavra.length() <= 10) {
+                    listaPalavras.add(palavra);
+                    Palavra p = new Palavra(palavra);
+                    palavras.add(p);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PalavraController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      }
-    } catch (FileNotFoundException ex) {
-      Logger.getLogger(PalavraController.class.getName()).log(Level.SEVERE, null, ex);
     }
-  }
 
-  public void add(Palavra palavra) {
-    palavras.add(palavra);
-  }
-
-  public static ArrayList<Palavra> getArrayPalavras() {
-    return palavras;
-  }
-  
-  public static void remover (String palavra) {
-	  for (Palavra p : palavras) {
-		  if (p.getPalavra().equals(palavra)) {
-			  palavras.remove(p);
-		  }
-	  }
-  }
-  
-  public static boolean contem(String palavra_){
-    for(Palavra palavra : palavras){
-      if(palavra.toString().equals(palavra_)){
-        return true;
-      }
+    public void add(Palavra palavra) {
+        palavras.add(palavra);
     }
-    
-    return false;
-  }
-  
-  public static Palavra getPalavra (String text) {
-	  Palavra palavra = null;
-	  for (Palavra p : palavras) {
-		  if (p.getPalavra().equalsIgnoreCase(text.toUpperCase())) {
-			  palavra = p;
-		  }
-	  }
-	  return palavra;
-  }
+
+    public static ArrayList<Palavra> getArrayPalavras() {
+        return palavras;
+    }
+
+    public static void remover(String palavra) {
+        for (Palavra p : palavras) {
+            if (p.getPalavra().equals(palavra)) {
+                palavras.remove(p);
+            }
+        }
+    }
+
+    public static boolean contem(String palavra_) {
+        for (Palavra palavra : palavras) {
+            if (palavra.toString().equals(palavra_)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static Palavra getPalavra(String text) {
+        Palavra palavra = null;
+        for (Palavra p : palavras) {
+            if (p.getPalavra().equalsIgnoreCase(text.toUpperCase())) {
+                palavra = p;
+            }
+        }
+        return palavra;
+    }
 }

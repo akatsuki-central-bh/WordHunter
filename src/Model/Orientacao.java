@@ -10,5 +10,5 @@ package Model;
  * @author leanddro
  */
 public enum Orientacao {
-  HORIZONTAL, VERTICAL, DIAGONAL;
+    HORIZONTAL, VERTICAL, DIAGONAL;
 }

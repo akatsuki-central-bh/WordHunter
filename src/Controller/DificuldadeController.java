@@ -31,7 +31,7 @@ public class DificuldadeController {
     public static void setColunas(int colunas) {
         DificuldadeController.colunas = colunas;
     }
-    
+
     public static int getLinhas() {
         return linhas;
     }

@@ -14,15 +14,17 @@ import java.util.Comparator;
  */
 public class Recorde implements Comparator<Jogador> {
 
-  @Override
-  public int compare(Jogador t1, Jogador t2) {
-    if(t1.getTempo() < t2.getTempo())
-      return -1;
-    
-    if(t1.getTempo() > t2.getTempo())
-      return +1;
-    
-    return 0;
-  }
-  
+    @Override
+    public int compare(Jogador t1, Jogador t2) {
+        if (t1.getTempo() < t2.getTempo()) {
+            return -1;
+        }
+
+        if (t1.getTempo() > t2.getTempo()) {
+            return +1;
+        }
+
+        return 0;
+    }
+
 }
