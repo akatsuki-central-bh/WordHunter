@@ -60,6 +60,17 @@ public class Menu extends javax.swing.JFrame {
 			}
 		});
 		
+		btn_Jogar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Jogo jogo = new Jogo();
+				jogo.setVisible(true);
+				setVisible(false);
+				
+			}
+		});
+		
 		setVisible(true);
 		pack();
 	}// </editor-fold>//GEN-END:initComponents

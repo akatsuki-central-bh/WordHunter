@@ -53,7 +53,15 @@ public class PalavraController {
   public static ArrayList<Palavra> getArrayPalavras() {
     return palavras;
   }
-
+  
+  public static void remover (String palavra) {
+	  for (Palavra p : palavras) {
+		  if (p.getPalavra().equals(palavra)) {
+			  palavras.remove(p);
+		  }
+	  }
+  }
+  
   public static boolean contem(String palavra_){
     for(Palavra palavra : palavras){
       if(palavra.toString().equals(palavra_)){
