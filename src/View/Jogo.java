@@ -65,7 +65,7 @@ public class Jogo extends JFrame {
 		setContentPane(contentPane);
 
 		txtDigiteAPalavra = new JTextField();
-		txtDigiteAPalavra.setBounds(44, 416, 397, 20);
+		txtDigiteAPalavra.setBounds(44, 540, 397, 20);
 		txtDigiteAPalavra.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDigiteAPalavra.setForeground(Color.GRAY);
 		txtDigiteAPalavra.setColumns(10);
@@ -77,7 +77,7 @@ public class Jogo extends JFrame {
 		textAreaPalavras.setEditable(false);
 		
 		JTextArea textAreaAcertos = new JTextArea();
-		textAreaAcertos.setBounds(497, 76, 177, 306);
+		textAreaAcertos.setBounds(590, 78, 177, 306);
 		textAreaAcertos.setLineWrap(true);
 		
 		JLabel lblNewLabel = new JLabel("Caça-Palavras");
@@ -85,13 +85,13 @@ public class Jogo extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JLabel lblTituloAcertos = new JLabel("Acertos");
-		lblTituloAcertos.setBounds(558, 23, 47, 15);
+		lblTituloAcertos.setBounds(648, 52, 47, 15);
 		lblTituloAcertos.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		textAreaPalavras.setText(mp.toString());//printar o mapa no jtextarea
 		
 		JButton btn_Enviar = new JButton("Enviar");
-		btn_Enviar.setBounds(518, 412, 132, 27);
+		btn_Enviar.setBounds(518, 536, 132, 27);
 		btn_Enviar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btn_Enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
