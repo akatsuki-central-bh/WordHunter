@@ -14,8 +14,6 @@ import java.util.Random;
 public class Palavra {
 
     private String palavra;
-    private int x;
-    private int y;
     private Posicao posicaoInicial;
     private Posicao posicaoFinal;
     private Orientacao orientacao;
@@ -26,13 +24,13 @@ public class Palavra {
     }
 
     public String getPalavra() {
-        StringBuilder sb = new StringBuilder();
-        Random r = new Random();
+        // StringBuilder sb = new StringBuilder();
+        // Random r = new Random();
 
-        if (r.nextBoolean()) {
-            sb.append(palavra);
-            return sb.reverse().toString();
-        }
+        // if (r.nextBoolean()) {
+        //     sb.append(palavra);
+        //     return sb.reverse().toString();
+        // }
         return palavra;
     }
 
@@ -67,22 +65,6 @@ public class Palavra {
 
     public String toString() {
         return palavra;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public Posicao getPosicaoInicial() {

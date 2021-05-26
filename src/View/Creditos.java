@@ -9,6 +9,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -76,7 +78,7 @@ public class Creditos extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("CAUÃƒ ROCHA");
+		JLabel lblNewLabel_1 = new JLabel("CAUÃ ROCHA");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_1);
 		
@@ -101,7 +103,7 @@ public class Creditos extends JFrame {
 		contentPane.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel_7 = new JLabel("UNIP 2021 3Â° SEMESTRE CIÃŠNCIA DA COMPUTAÃ‡ÃƒO");
+		JLabel lblNewLabel_7 = new JLabel("UNIP 2021 3° SEMESTRE CIÊNCIA DA COMPUTAÇÃO");
 		panel_2.add(lblNewLabel_7);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -116,6 +118,16 @@ public class Creditos extends JFrame {
 		btnVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnVoltar.setForeground(Color.BLACK);
 		contentPane.add(btnVoltar);
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Principal.menu.setVisible(true);
+				
+			}
+		});
 		
 		
 		

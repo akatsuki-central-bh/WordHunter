@@ -101,6 +101,17 @@ public class Menu extends javax.swing.JFrame {
 		panelParteDeBaixo.add(panelBaixoDireita);
 		panelBaixoDireita.setLayout(null);
 		
+		btn_Creditos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Creditos creditos = new Creditos();
+				creditos.setVisible(true);
+				setVisible(false);
+				
+			}
+		});
+		
 		btn_Recordes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -114,8 +125,8 @@ public class Menu extends javax.swing.JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Jogo jogo = new Jogo();
-				jogo.setVisible(true);
+				SelecaoDificuldade telaDificuldade = new SelecaoDificuldade();
+				telaDificuldade.setVisible(true);
 				setVisible(false);
 				
 			}

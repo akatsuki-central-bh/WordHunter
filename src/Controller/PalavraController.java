@@ -25,6 +25,7 @@ public class PalavraController {
 
   public static void gerarPalavras() {
     try {
+      
       File entradaArquivo = new File("src/Data/palavras.txt");
       Random randomico = new Random();
       ArrayList<String> listaPalavras = new ArrayList<String>();
@@ -32,6 +33,10 @@ public class PalavraController {
       Scanner lerArq = new Scanner(entradaArquivo, "UTF-8");
       String linha = lerArq.nextLine();
       String[] palavrasVetor = linha.split(";");
+      
+      if (palavras.size()==5) {
+    	  palavras.clear();
+      }
       
       while (palavras.size() < 5) {
         String palavra = palavrasVetor[randomico.nextInt(palavrasVetor.length)];
@@ -70,5 +75,15 @@ public class PalavraController {
     }
     
     return false;
+  }
+  
+  public static Palavra getPalavra (String text) {
+	  Palavra palavra = null;
+	  for (Palavra p : palavras) {
+		  if (p.getPalavra().equalsIgnoreCase(text.toUpperCase())) {
+			  palavra = p;
+		  }
+	  }
+	  return palavra;
   }
 }
