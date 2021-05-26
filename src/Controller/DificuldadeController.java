@@ -4,7 +4,6 @@ import Model.Dificuldade;
 
 public class DificuldadeController {
 
-    private static Dificuldade dificuldade;
     private static int colunas;
     private static int linhas;
 
@@ -32,7 +31,7 @@ public class DificuldadeController {
     public static void setColunas(int colunas) {
         DificuldadeController.colunas = colunas;
     }
-
+    
     public static int getLinhas() {
         return linhas;
     }

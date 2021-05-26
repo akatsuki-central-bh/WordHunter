@@ -36,7 +36,7 @@ import java.awt.event.KeyEvent;
 public class Jogo extends JFrame {
 
     private JPanel contentPane;
-    private int acertos = 0;
+    private int acertos =0;
     Mapa mp;
     private JTextField digitarPalvra;
 
@@ -44,12 +44,7 @@ public class Jogo extends JFrame {
      * Launch the application.
      */
     public Jogo() {
-        DificuldadeController.gerarDificuldade(SelecaoDificuldade.getDificuldade());
-        PalavraController.gerarPalavras();
-
-        mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
-        mp.alocarPalavras();
-        System.out.println(PalavraController.getArrayPalavras().toString());
+       
         initComponents();
 
     }
@@ -58,6 +53,15 @@ public class Jogo extends JFrame {
      * Create the frame.
      */
     private void initComponents() {
+        DificuldadeController.gerarDificuldade(SelecaoDificuldade.getDificuldade());
+        PalavraController.gerarPalavras();
+
+        mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
+        mp.alocarPalavras();
+        System.out.println(PalavraController.getArrayPalavras().toString());
+        System.out.println("Dificuldade: "+SelecaoDificuldade.getDificuldade());
+        System.out.println("Acertos no inicio do jogo: "+acertos);
+        
         setFont(new Font("Arial", Font.BOLD, 12));
         setTitle("WordHunter");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,6 +176,7 @@ public class Jogo extends JFrame {
                         acertos++;
                         p.setDescoberta(true);
                         System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
+                        System.out.println("Acertos por rodada: "+acertos);
                     }
                     digitarPalvra.setText("");
                     if (acertos == 5) {
@@ -227,6 +232,7 @@ public class Jogo extends JFrame {
                     acertos++;
                     p.setDescoberta(true);
                     System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
+                    System.out.println("Acertos por rodada: "+acertos);
                 }
                 digitarPalvra.setText("");
                 if (acertos == 5) {

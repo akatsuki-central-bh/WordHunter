@@ -17,7 +17,7 @@ import javax.swing.JButton;
 public class SelecaoDificuldade extends JFrame {
 
 	private JPanel contentPane;
-	private static Dificuldade dificuldade = Dificuldade.FACIL;
+	private static Dificuldade dificuldade;
 
 	public SelecaoDificuldade() {
 		initComponents();
