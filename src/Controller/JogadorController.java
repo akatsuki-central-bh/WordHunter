@@ -48,9 +48,7 @@ public class JogadorController implements Serializable {
             objLeitura.close();
             arquivoLeitura.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(JogadorController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(JogadorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

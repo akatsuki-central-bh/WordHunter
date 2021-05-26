@@ -1,6 +1,7 @@
 package View;
 
 import Componentes.LabelMapa;
+import Controller.Cronometro;
 import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,9 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
 import Controller.DificuldadeController;
+import Controller.JogadorController;
 import Controller.PalavraController;
+import Model.Jogador;
 import Model.Mapa;
 import Model.Palavra;
 
@@ -30,13 +33,15 @@ public class Jogo extends JFrame {
     private int acertos = 0;
     Mapa mp;
     private JTextField digitarPalvra;
-
+    private Cronometro cnt;
     /**
      * Launch the application.
      */
     public Jogo() {
 
         initComponents();
+        cnt = new Cronometro();
+        cnt.start();
 
     }
 
@@ -154,7 +159,10 @@ public class Jogo extends JFrame {
                     }
                     digitarPalvra.setText("");
                     if (acertos == 5) {
-                        JOptionPane.showMessageDialog(null, "Parab�ns voc� venceu!");
+                        cnt.interrupt();
+                        String nick = JOptionPane.showInputDialog("Digite seu nick:");
+                        JogadorController.add(new Jogador(nick, cnt.getTempo()));
+                        JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
                         dispose();
                         Principal.menu.setVisible(true);
                     }
