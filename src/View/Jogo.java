@@ -54,9 +54,6 @@ public class Jogo extends JFrame {
 
         mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
         mp.alocarPalavras();
-        System.out.println(PalavraController.getArrayPalavras().toString());
-        System.out.println("Dificuldade: " + SelecaoDificuldade.getDificuldade());
-        System.out.println("Acertos no inicio do jogo: " + acertos);
 
         setFont(new Font("Arial", Font.BOLD, 12));
         setTitle("WordHunter");
@@ -154,8 +151,6 @@ public class Jogo extends JFrame {
                         textAreaAcertos.append(palavra + "\n");
                         acertos++;
                         p.setDescoberta(true);
-                        System.out.println("Palavra: " + p.getPalavra() + " Descoberta: " + p.isDescoberta() + "\n");
-                        System.out.println("Acertos por rodada: " + acertos);
                     }
                     digitarPalvra.setText("");
                     if (acertos == 5) {
@@ -216,8 +211,6 @@ public class Jogo extends JFrame {
                     textAreaAcertos.append(palavra + "\n");
                     acertos++;
                     p.setDescoberta(true);
-                    System.out.println("Palavra: " + p.getPalavra() + " Descoberta: " + p.isDescoberta() + "\n");
-                    System.out.println("Acertos por rodada: " + acertos);
                 }
                 digitarPalvra.setText("");
                 if (acertos == 5) {

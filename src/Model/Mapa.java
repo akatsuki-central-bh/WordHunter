@@ -163,20 +163,6 @@ public class Mapa {
         r = randomico.nextInt(possiveisColunas.size());
         int colunaIndex = possiveisColunas.get(r);
 
-        if (palavra.getOrientacao() == Orientacao.HORIZONTAL) {
-            palavra.setPosicaoInicial(new Posicao(linhaIndex, colunaIndex));
-            palavra.setPosicaoFinal(new Posicao(linhaIndex, colunaIndex + letras.length - 1));
-        } else if (palavra.getOrientacao() == Orientacao.VERTICAL) {
-            palavra.setPosicaoInicial(new Posicao(colunaIndex, linhaIndex));
-            palavra.setPosicaoFinal(new Posicao(colunaIndex + letras.length - 1, linhaIndex));
-        }
-
-        System.out.println("-----------");
-        System.out.println("Palavra: " + palavra.toString());
-        System.out.println("Posicao inicial: " + palavra.getPosicaoInicial());
-        System.out.println("Posicao final: " + palavra.getPosicaoFinal());
-        System.out.println("Orientação: " + palavra.getOrientacao());
-
         casas[linhaIndex] = concatenar(casas[linhaIndex], letras, colunaIndex);
 
         return true;

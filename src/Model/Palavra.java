@@ -14,8 +14,6 @@ import java.util.Random;
 public class Palavra {
 
     private String palavra;
-    private Posicao posicaoInicial;
-    private Posicao posicaoFinal;
     private Orientacao orientacao;
     private boolean descoberta = false;
 
@@ -66,22 +64,6 @@ public class Palavra {
     @Override
     public String toString() {
         return palavra;
-    }
-
-    public Posicao getPosicaoInicial() {
-        return posicaoInicial;
-    }
-
-    public void setPosicaoInicial(Posicao posicaoInicial) {
-        this.posicaoInicial = posicaoInicial;
-    }
-
-    public Posicao getPosicaoFinal() {
-        return posicaoFinal;
-    }
-
-    public void setPosicaoFinal(Posicao posicaoFinal) {
-        this.posicaoFinal = posicaoFinal;
     }
 
 }
