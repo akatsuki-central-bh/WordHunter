@@ -23,8 +23,20 @@ public class Mapa {
   private ArrayList<Palavra> palavras;
   private int largura, altura;
   private ArrayList<String> alfabeto = new ArrayList<>();
+  
+ //GETTER 
+  public int getLargura() {
+	return largura;
+}
+public int getAltura() {
+	return altura;
+}
+public String[][] getCasas() {
+	return casas;
+  }
+//CONSTRUTOR
 
-  public Mapa(int altura, int largura, ArrayList<Palavra> palavras) {
+public Mapa(int altura, int largura, ArrayList<Palavra> palavras) {
     this.casas = new String[largura][altura];
     this.palavras = palavras;
 

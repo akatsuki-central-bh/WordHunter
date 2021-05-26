@@ -4,8 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 import javax.swing.border.EmptyBorder;
 
 import Controller.DificuldadeController;
@@ -14,29 +13,33 @@ import Model.Dificuldade;
 import Model.Mapa;
 import Model.Palavra;
 
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import javax.swing.JTextField;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JList;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
+
 import java.awt.Color;
-import javax.swing.SwingConstants;
+
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Jogo extends JFrame {
 
     private JPanel contentPane;
-    private JTextField txtDigiteAPalavra;
     private int acertos = 0;
     private Dificuldade dificuldade;
     Mapa mp;
+    private JTextField digitarPalvra;
 
     /**
      * Launch the application.
@@ -60,41 +63,84 @@ public class Jogo extends JFrame {
         setFont(new Font("Arial", Font.BOLD, 12));
         setTitle("WordHunter");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(800,600));
         setResizable(false);
-        setBounds(100, 100, 800, 600);
+        setBackground( new Color(32,136,213));
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-
-        txtDigiteAPalavra = new JTextField();
-        txtDigiteAPalavra.setBounds(44, 540, 397, 20);
-        txtDigiteAPalavra.setHorizontalAlignment(SwingConstants.CENTER);
-        txtDigiteAPalavra.setForeground(Color.GRAY);
-        txtDigiteAPalavra.setColumns(10);
-
-        JTextArea textAreaPalavras = new JTextArea();
-        textAreaPalavras.setBounds(44, 76, 460, 460);
-        textAreaPalavras.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        textAreaPalavras.setFont(new Font("Monospaced", Font.PLAIN, 15));
-        textAreaPalavras.setEditable(false);
-
+        contentPane.setLayout(null);
+        contentPane.setBackground(Color.WHITE);
+        
+        //LINHAS E COLUNAS
+        int linhas = mp.getAltura();
+        int colunas = mp.getLargura();
+        
+        //PALETA CORES
+        Color corTituloFundo = new Color(32,136,213);
+        Color corAcertosLbl = new Color(60,165,232);
+        Color palavrasEncontradas = new Color(232,57, 95);
+        
+        //Border bordaAcertos = BorderFactory.createMatteBorder(2, 2,2,2, new Color (161, 91, 158));
+        Border bordaAcertos = BorderFactory.createMatteBorder(2, 2,2,0, corAcertosLbl);
+        Border bordaBotaoEntered = BorderFactory.createMatteBorder(2, 2,2,2, Color.WHITE);
+        
+        
+        JPanel pnlTitulo = new JPanel();
+        pnlTitulo.setBackground(corTituloFundo);
+        pnlTitulo.setBounds(0, 0, 600, 60);
+        contentPane.add(pnlTitulo);
+        pnlTitulo.setLayout(new GridLayout(0, 1, 0, 0));
+        
+        JLabel lblTitulo = new JLabel("CAÇA PALAVRAS");
+        lblTitulo.setForeground(Color.WHITE);
+        lblTitulo.setBackground(Color.BLUE);
+        lblTitulo.setFont(new Font("Dialog", Font.BOLD, 21));
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        pnlTitulo.add(lblTitulo);
+        
+        JPanel pnlMapa = new JPanel();
+        pnlMapa.setBackground(Color.WHITE);
+        pnlMapa.setBounds(0, 50, 600, 521);
+        pnlMapa.setLayout(new GridLayout(linhas, colunas, 0, 0));
+        
+		 for(int i=0; i<colunas; i++) {
+			 for(int j=0;j<linhas; j++) {
+				 pnlMapa.add(new LabelMapa(mp.getCasas()[i][j])); } 
+			 }
+        
+        
+        contentPane.add(pnlMapa);
+        
+        JPanel pnlAcertostitulo = new JPanel();
+        pnlAcertostitulo.setBackground(corAcertosLbl);
+        pnlAcertostitulo.setBounds(600, 0, 194, 60);
+        contentPane.add(pnlAcertostitulo);
+        pnlAcertostitulo.setLayout(new GridLayout(0, 1, 0, 0));
+        
+        JLabel lblAcertos = new JLabel("ACERTOS");
+        lblAcertos.setForeground(Color.WHITE);
+        lblAcertos.setFont(new Font("Dialog", Font.BOLD, 21));
+        lblAcertos.setHorizontalAlignment(SwingConstants.CENTER);
+        pnlAcertostitulo.add(lblAcertos);
+        
+        JPanel pnlAcertosPalavras = new JPanel();
+        pnlAcertosPalavras.setBackground(corAcertosLbl);
+        pnlAcertosPalavras.setBounds(600, 59, 194, 445);
+        contentPane.add(pnlAcertosPalavras);
+        pnlAcertosPalavras.setLayout(null);
+        
         JTextArea textAreaAcertos = new JTextArea();
-        textAreaAcertos.setBounds(590, 78, 177, 306);
-        textAreaAcertos.setLineWrap(true);
-
-        JLabel lblNewLabel = new JLabel("Ca�a-Palavras");
-        lblNewLabel.setBounds(171, 20, 108, 19);
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-
-        JLabel lblTituloAcertos = new JLabel("Acertos");
-        lblTituloAcertos.setBounds(648, 52, 47, 15);
-        lblTituloAcertos.setFont(new Font("Tahoma", Font.BOLD, 12));
+        textAreaAcertos.setFont(new Font("Yu Gothic", Font.PLAIN, 18));
+        textAreaAcertos.setBounds(0, 0, 194, 445);
+        textAreaAcertos.setEditable(false);
+        textAreaAcertos.setForeground(palavrasEncontradas);
+        textAreaAcertos.setBorder(bordaAcertos);
         String limpeza = mp.toString()
                 .replace("[", "")
                 .replace("]", "")
                 .replace(",", "");
-        textAreaPalavras.setText(limpeza);//printar o mapa no jtextarea
-        textAreaPalavras.setBackground(this.getBackground());
 //        switch(dificuldade){
 //            case DIFICIL:
 //                textAreaPalavras.setSize(460, 460);
@@ -108,32 +154,88 @@ public class Jogo extends JFrame {
 //        }
         
         
-        JButton btn_Enviar = new JButton("Enviar");
-        btn_Enviar.setBounds(518, 536, 132, 27);
-        btn_Enviar.setFont(new Font("Tahoma", Font.BOLD, 12));
-        btn_Enviar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String palavra = txtDigiteAPalavra.getText().toUpperCase();
-                if (PalavraController.contem(palavra)) {
-                    textAreaAcertos.append(palavra + "\n");
-                    PalavraController.remover(palavra);
-                    acertos++;
-
-                }
-                txtDigiteAPalavra.setText("");
-            }
+        pnlAcertosPalavras.add(textAreaAcertos);
+        
+        JPanel pnlDigitar = new JPanel();
+        pnlDigitar.setBackground(Color.LIGHT_GRAY);
+        pnlDigitar.setBounds(600, 504, 194, 30);
+        contentPane.add(pnlDigitar);
+        pnlDigitar.setLayout(new GridLayout(0, 1, 0, 0));
+        
+        digitarPalvra = new JTextField();
+        digitarPalvra.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getExtendedKeyCode() == 10) {
+        			String palavra = digitarPalvra.getText().toUpperCase();
+                    if (PalavraController.contem(palavra)) {
+                        textAreaAcertos.append(palavra + "\n");
+                        PalavraController.remover(palavra);
+                        acertos++;
+                    }
+                    digitarPalvra.setText("");
+        		}
+        	}
         });
+        digitarPalvra.setForeground(Color.LIGHT_GRAY);
+        digitarPalvra.setText("Digitar Palavra");
+        digitarPalvra.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		digitarPalvra.setForeground(Color.LIGHT_GRAY);
+        	}
+        	@Override
+        	public void focusGained(FocusEvent e) {        		
+        		digitarPalvra.setForeground(palavrasEncontradas);
+        		digitarPalvra.setText("");
+        	}
+        });
+        digitarPalvra.setBorder(bordaAcertos);
+        pnlDigitar.add(digitarPalvra);
+        digitarPalvra.setColumns(10);
+        
+        JPanel pnlBtn = new JPanel();
+        pnlBtn.setBackground(corAcertosLbl);
+        pnlBtn.setBounds(600, 534, 194, 37);
+        contentPane.add(pnlBtn);
+        pnlBtn.setLayout(null);
+        
+        JButton btnChutar = new JButton("CHUTAR");
+        btnChutar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnChutar.setForeground(Color.WHITE);
+        		btnChutar.setBorder(bordaBotaoEntered);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		btnChutar.setForeground(Color.WHITE);
+        		btnChutar.setBorder(bordaAcertos);
+        	}
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		 String palavra = digitarPalvra.getText().toUpperCase();
+                 if (PalavraController.contem(palavra)) {
+                     textAreaAcertos.append(palavra + "\n");
+                     PalavraController.remover(palavra);
+                     acertos++;
 
+                 }
+                 digitarPalvra.setText("Digitar Palavra");
+        		
+        	}
+        });
         if (acertos == 5) {
 
         }
-        contentPane.setLayout(null);
-        contentPane.add(txtDigiteAPalavra);
-        contentPane.add(textAreaPalavras);
-        contentPane.add(btn_Enviar);
-        contentPane.add(textAreaAcertos);
-        contentPane.add(lblNewLabel);
-        contentPane.add(lblTituloAcertos);
+        btnChutar.setBounds(0, 0, 194, 27);
+        btnChutar.setOpaque(true);
+        btnChutar.setContentAreaFilled(false);
+        btnChutar.setBorder(bordaAcertos);
+        btnChutar.setBackground(Color.WHITE);
+        btnChutar.setForeground(Color.WHITE);
+        btnChutar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        pnlBtn.add(btnChutar);
 
     }
 
