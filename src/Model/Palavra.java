@@ -23,13 +23,13 @@ public class Palavra{
   }
 
   public String getPalavra() {
-    StringBuilder sb = new StringBuilder();
-    Random r = new Random();
-    
-    if(r.nextBoolean()){
-      sb.append(palavra);
-      return sb.reverse().toString();
-    }
+//    StringBuilder sb = new StringBuilder();
+//    Random r = new Random();
+//    
+//    if(r.nextBoolean()){
+//      sb.append(palavra);
+//      return sb.reverse().toString();
+//    }
     return palavra;
   }
 
