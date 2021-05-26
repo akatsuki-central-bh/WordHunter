@@ -63,6 +63,7 @@ public class Palavra {
         this.descoberta = descoberta;
     }
 
+    @Override
     public String toString() {
         return palavra;
     }

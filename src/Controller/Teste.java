@@ -16,38 +16,39 @@ import java.util.Scanner;
  * @author leanddro
  */
 public class Teste {
-  public static void main(String[] args) {
-    Dificuldade dificuldade = Dificuldade.FACIL;
 
-    DificuldadeController.gerarDificuldade(dificuldade);
-    PalavraController.gerarPalavras();
+    public static void main(String[] args) {
+        Dificuldade dificuldade = Dificuldade.FACIL;
 
-    System.out.println("Dificuldade: " + dificuldade);
-    System.out.println("Linhas: " + DificuldadeController.getLinhas());
-    System.out.println("C: " + DificuldadeController.getColunas());
-    
-    ArrayList<Palavra> palavras = PalavraController.getArrayPalavras();
+        DificuldadeController.gerarDificuldade(dificuldade);
+        PalavraController.gerarPalavras();
+
+        System.out.println("Dificuldade: " + dificuldade);
+        System.out.println("Linhas: " + DificuldadeController.getLinhas());
+        System.out.println("C: " + DificuldadeController.getColunas());
+
+        ArrayList<Palavra> palavras = PalavraController.getArrayPalavras();
 //    System.out.println("Palavras escolhidas: " + PalavraController.getArrayPalavras());
 
-    Mapa mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
+        Mapa mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
 
-    mp.alocarPalavras();
-    System.out.println(mp);
-    
-    Scanner scan = new Scanner(System.in);
-    
-    ArrayList<String> acertos = new ArrayList<>();
-    
-    while(acertos.size() != palavras.size()){
-      System.out.println("Informe uma palavra:");
-      String input = scan.nextLine().toUpperCase();
-      if(PalavraController.contem(input)){
-        System.out.println("Acertou!!");
-        acertos.add(input);
-      }else{
-        System.out.println("Errrrrou!!");
-      }
+        mp.alocarPalavras();
+        System.out.println(mp);
+
+        Scanner scan = new Scanner(System.in);
+
+        ArrayList<String> acertos = new ArrayList<>();
+
+        while (acertos.size() != palavras.size()) {
+            System.out.println("Informe uma palavra:");
+            String input = scan.nextLine().toUpperCase();
+            if (PalavraController.contem(input)) {
+                System.out.println("Acertou!!");
+                acertos.add(input);
+            } else {
+                System.out.println("Errrrrou!!");
+            }
+        }
+        System.out.println("Parabéns vc ganhou!!");
     }
-    System.out.println("Parabéns vc ganhou!!");
-  }
 }

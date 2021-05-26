@@ -12,31 +12,33 @@ import java.io.Serializable;
  * @author leanddro
  */
 public class Jogador implements Serializable {
-  private String apelido = "anonimo";
-  private double tempo;
 
-  public Jogador(String apelido, double tempo) {
-    this.apelido = apelido;
-    this.tempo = tempo;
-  }
+    private String apelido = "anonimo";
+    private double tempo;
 
-  public String getApelido() {
-    return apelido;
-  }
+    public Jogador(String apelido, double tempo) {
+        this.apelido = apelido;
+        this.tempo = tempo;
+    }
 
-  public void setApelido(String apelido) {
-    this.apelido = apelido;
-  }
+    public String getApelido() {
+        return apelido;
+    }
 
-  public double getTempo() {
-    return tempo;
-  }
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
 
-  public void setTempo(double tempo) {
-    this.tempo = tempo;
-  }
-  
-  public String toString(){
-    return apelido+tempo;
-  }
+    public double getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(double tempo) {
+        this.tempo = tempo;
+    }
+
+    @Override
+    public String toString() {
+        return apelido + tempo;
+    }
 }

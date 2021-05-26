@@ -17,13 +17,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JTable;
 import javax.swing.border.Border;
-import javax.swing.plaf.BorderUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout.Alignment;
@@ -38,6 +35,7 @@ import java.awt.event.MouseEvent;
  * @author leanddro
  */
 public class Ranking extends javax.swing.JFrame {
+
     /**
      * Creates new form Ranking
      */
@@ -212,8 +210,8 @@ public class Ranking extends javax.swing.JFrame {
         });
     }
 
-	// Variables declaration - do not modify                     
-	private javax.swing.JButton btn_Ok;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btn_Ok;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
 }

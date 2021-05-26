@@ -10,6 +10,7 @@ package Model;
  * @author leanddro
  */
 public class Posicao {
+
     private int x, y;
 
     public Posicao(int x, int y) {
@@ -32,9 +33,10 @@ public class Posicao {
     public void setY(int y) {
         this.y = y;
     }
-    
-    public String toString(){
-        return "x:"+x+" y:"+y;
+
+    @Override
+    public String toString() {
+        return "x:" + x + " y:" + y;
     }
-    
+
 }

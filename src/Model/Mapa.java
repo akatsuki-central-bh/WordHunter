@@ -5,13 +5,9 @@
  */
 package Model;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
-import Controller.DificuldadeController;
-import Controller.PalavraController;
 
 /**
  *
@@ -174,7 +170,7 @@ public class Mapa {
             palavra.setPosicaoInicial(new Posicao(colunaIndex, linhaIndex));
             palavra.setPosicaoFinal(new Posicao(colunaIndex + letras.length - 1, linhaIndex));
         }
-        
+
         System.out.println("-----------");
         System.out.println("Palavra: " + palavra.toString());
         System.out.println("Posicao inicial: " + palavra.getPosicaoInicial());
@@ -217,23 +213,5 @@ public class Mapa {
         }
 
         return result;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        Dificuldade dificuldade = Dificuldade.FACIL;
-
-        DificuldadeController.gerarDificuldade(dificuldade);
-        PalavraController.gerarPalavras();
-
-        System.out.println("Dificuldade: " + dificuldade);
-        System.out.println("Linhas: " + DificuldadeController.getLinhas());
-        System.out.println("C: " + DificuldadeController.getColunas());
-
-        System.out.println("Palavras escolhidas: " + PalavraController.getArrayPalavras());
-
-        Mapa mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
-
-        mp.alocarPalavras();
-        System.out.println(mp);
     }
 }
