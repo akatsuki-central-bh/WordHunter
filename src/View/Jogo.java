@@ -45,7 +45,7 @@ public class Jogo extends JFrame {
      * Launch the application.
      */
     public Jogo() {
-        dificuldade = Dificuldade.DIFICIL;
+        dificuldade = Dificuldade.FACIL;
         DificuldadeController.gerarDificuldade(dificuldade);
         PalavraController.gerarPalavras();
 
