@@ -37,7 +37,6 @@ public class Jogo extends JFrame {
 
     private JPanel contentPane;
     private int acertos = 0;
-    private Dificuldade dificuldade;
     Mapa mp;
     private JTextField digitarPalvra;
 
@@ -45,13 +44,12 @@ public class Jogo extends JFrame {
      * Launch the application.
      */
     public Jogo() {
-        dificuldade = Dificuldade.DIFICIL;
-        DificuldadeController.gerarDificuldade(dificuldade);
+        DificuldadeController.gerarDificuldade(SelecaoDificuldade.getDificuldade());
         PalavraController.gerarPalavras();
 
         mp = new Mapa(DificuldadeController.getLinhas(), DificuldadeController.getColunas(), PalavraController.getArrayPalavras());
         mp.alocarPalavras();
-
+        System.out.println(PalavraController.getArrayPalavras().toString());
         initComponents();
 
     }
@@ -93,7 +91,7 @@ public class Jogo extends JFrame {
         contentPane.add(pnlTitulo);
         pnlTitulo.setLayout(new GridLayout(0, 1, 0, 0));
         
-        JLabel lblTitulo = new JLabel("CAÃ‡A PALAVRAS");
+        JLabel lblTitulo = new JLabel("CAÇA PALAVRAS");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setBackground(Color.BLUE);
         lblTitulo.setFont(new Font("Dialog", Font.BOLD, 21));
@@ -168,12 +166,20 @@ public class Jogo extends JFrame {
         	public void keyPressed(KeyEvent e) {
         		if(e.getExtendedKeyCode() == 10) {
         			String palavra = digitarPalvra.getText().toUpperCase();
-                    if (PalavraController.contem(palavra)) {
+        			Palavra p = PalavraController.getPalavra(palavra);
+                    if (PalavraController.contem(palavra)&&(p != null && p.isDescoberta()==false)) {
                         textAreaAcertos.append(palavra + "\n");
-                        PalavraController.remover(palavra);
                         acertos++;
+                        p.setDescoberta(true);
+                        System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
                     }
                     digitarPalvra.setText("");
+                    if (acertos == 5) {
+                    	JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
+                    	dispose();
+                    	Principal.menu.setVisible(true);
+                    }
+                    
         		}
         	}
         });
@@ -214,20 +220,23 @@ public class Jogo extends JFrame {
         	}
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		 String palavra = digitarPalvra.getText().toUpperCase();
-                 if (PalavraController.contem(palavra)) {
-                     textAreaAcertos.append(palavra + "\n");
-                     PalavraController.remover(palavra);
-                     acertos++;
-
-                 }
-                 digitarPalvra.setText("Digitar Palavra");
+        		String palavra = digitarPalvra.getText().toUpperCase();
+    			Palavra p = PalavraController.getPalavra(palavra);
+                if (PalavraController.contem(palavra)&&(p != null && p.isDescoberta()==false)) {
+                    textAreaAcertos.append(palavra + "\n");
+                    acertos++;
+                    p.setDescoberta(true);
+                    System.out.println("Palavra: "+p.getPalavra1()+" Descoberta: "+p.isDescoberta()+"\n");
+                }
+                digitarPalvra.setText("");
+                if (acertos == 5) {
+                	JOptionPane.showMessageDialog(null, "Parabéns você venceu!");
+                	dispose();
+                	Principal.menu.setVisible(true);
+                }
         		
         	}
         });
-        if (acertos == 5) {
-
-        }
         btnChutar.setBounds(0, 0, 194, 27);
         btnChutar.setOpaque(true);
         btnChutar.setContentAreaFilled(false);

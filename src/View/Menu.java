@@ -125,8 +125,8 @@ public class Menu extends javax.swing.JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Jogo jogo = new Jogo();
-				jogo.setVisible(true);
+				SelecaoDificuldade telaDificuldade = new SelecaoDificuldade();
+				telaDificuldade.setVisible(true);
 				setVisible(false);
 				
 			}

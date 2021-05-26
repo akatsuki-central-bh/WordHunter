@@ -79,6 +79,10 @@ public class Palavra{
     return y;
   }
 
+  public String getPalavra1() {
+	  return palavra;
+  }
+  
   public void setY(int y) {
     this.y = y;
   }

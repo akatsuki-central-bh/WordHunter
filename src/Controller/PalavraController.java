@@ -71,4 +71,14 @@ public class PalavraController {
     
     return false;
   }
+  
+  public static Palavra getPalavra (String text) {
+	  Palavra palavra = null;
+	  for (Palavra p : palavras) {
+		  if (p.getPalavra1().equalsIgnoreCase(text.toUpperCase())) {
+			  palavra = p;
+		  }
+	  }
+	  return palavra;
+  }
 }
